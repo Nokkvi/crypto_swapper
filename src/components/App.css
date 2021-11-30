@@ -1,1 +1,14 @@
 /* Styles go here */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.main-wrapper {
+  max-width: 600px;
+}

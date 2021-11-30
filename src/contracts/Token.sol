@@ -1,8 +1,8 @@
 pragma solidity >= 0.5.16;
 
 contract Token {
-    string  public name = "DApp Token";
-    string  public symbol = "DAPP";
+    string  public name = "OK Token";
+    string  public symbol = "OKT";
     uint256 public totalSupply = 1000000000000000000000000; // 1 million tokens
     uint8   public decimals = 18;
 
