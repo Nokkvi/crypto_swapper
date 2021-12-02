@@ -37,7 +37,6 @@ class App extends Component {
     this.setState({ account: accounts[0] });
 
     const ethBalance = await web3.eth.getBalance(this.state.account);
-    console.log(ethBalance);
     this.setState({ ethBalance });
 
     const networkId = await web3.eth.net.getId();
@@ -81,6 +80,25 @@ class App extends Component {
       });
   };
 
+  sellTokens = async (tokenAmount) => {
+    console.log(this.state.account);
+    this.setState({ loading: true });
+    this.state.token.methods
+      .approve(this.state.ethSwap._address, tokenAmount)
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        console.log(this.state.account);
+        this.state.ethSwap.methods
+          .sellTokens(tokenAmount)
+          .send({ from: this.state.account })
+          .on("transactionHash", (hash) => {
+            console.log("hash");
+            this.setState({ loading: false });
+            this.loadBlockChainData();
+          });
+      });
+  };
+
   loadWeb3 = async () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -106,6 +124,7 @@ class App extends Component {
       content = (
         <Main
           buyTokens={this.buyTokens}
+          sellTokens={this.sellTokens}
           ethBalance={this.state.ethBalance}
           tokenBalance={this.state.tokenBalance}
           rate={this.state.rate}
