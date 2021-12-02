@@ -81,7 +81,6 @@ class App extends Component {
   };
 
   sellTokens = async (tokenAmount) => {
-    console.log(this.state.account);
     this.setState({ loading: true });
     this.state.token.methods
       .approve(this.state.ethSwap._address, tokenAmount)
